@@ -12,7 +12,11 @@ public class TamanhosProdutosModel implements Serializable {
 @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID tamanho_produto_id;
-    private UUID produto_id;
+
+    @ManyToOne
+    @JoinColumn(name = "produto_id")
+    private ProdutoModel produto_id;
+
     private String tamanho;
     private int estoque;
 
@@ -24,11 +28,11 @@ public class TamanhosProdutosModel implements Serializable {
         this.tamanho_produto_id = tamanho_produto_id;
     }
 
-    public UUID getProduto_id() {
+    public ProdutoModel getProduto_id() {
         return produto_id;
     }
 
-    public void setProduto_id(UUID produto_id) {
+    public void setProduto_id(ProdutoModel produto_id) {
         this.produto_id = produto_id;
     }
 

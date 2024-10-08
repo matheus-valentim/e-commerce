@@ -3,6 +3,7 @@ package ecommerce.Model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,7 +15,24 @@ public class ProdutoModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID produto_id;
     @ManyToOne
-    private UUID categoria_id;
+    @JoinColumn(name = "categoria_id")
+    private CategoriasModel categoria_id;
+
+    @OneToMany(mappedBy = "produto_id", cascade = CascadeType.ALL)
+    private List<TamanhosProdutosModel> tamanhos_id;
+
+    @OneToMany(mappedBy = "produto_id", cascade = CascadeType.ALL)
+    private List<CoresProdutosModel> cores_id;
+
+    @OneToMany(mappedBy = "produto_id", cascade = CascadeType.ALL)
+    private List<ItensPedidoModel> itensPedidos_id;
+
+    @OneToMany(mappedBy = "produto_id", cascade = CascadeType.ALL)
+    private List<AvaliacoesModel> avaliacoes_id;
+
+    @ManyToMany(mappedBy = "carrinho_id")
+    private List<UsuarioModel> usuariosNoCarrinho_id;
+
     private String nome;
     private String descricao;
     private float preco;
@@ -23,7 +41,7 @@ public class ProdutoModel implements Serializable {
     private String genero;
     //transformar genero em um enum
     private String criado_em;
-    private String arualizado_em;
+    private String atualizado_em;
 
     public UUID getProduto_id() {
         return produto_id;
@@ -33,11 +51,11 @@ public class ProdutoModel implements Serializable {
         this.produto_id = produto_id;
     }
 
-    public UUID getCategoria_id() {
+    public CategoriasModel getCategoria_id() {
         return categoria_id;
     }
 
-    public void setCategoria_id(UUID categoria_id) {
+    public void setCategoria_id(CategoriasModel categoria_id) {
         this.categoria_id = categoria_id;
     }
 
@@ -98,10 +116,50 @@ public class ProdutoModel implements Serializable {
     }
 
     public String getArualizado_em() {
-        return arualizado_em;
+        return atualizado_em;
     }
 
     public void setArualizado_em(String arualizado_em) {
-        this.arualizado_em = arualizado_em;
+        this.atualizado_em = arualizado_em;
+    }
+
+    public List<TamanhosProdutosModel> getTamanhos_id() {
+        return tamanhos_id;
+    }
+
+    public void setTamanhos_id(List<TamanhosProdutosModel> tamanhos_id) {
+        this.tamanhos_id = tamanhos_id;
+    }
+
+    public List<CoresProdutosModel> getCores_id() {
+        return cores_id;
+    }
+
+    public void setCores_id(List<CoresProdutosModel> cores_id) {
+        this.cores_id = cores_id;
+    }
+
+    public List<ItensPedidoModel> getItensPedidos_id() {
+        return itensPedidos_id;
+    }
+
+    public void setItensPedidos_id(List<ItensPedidoModel> itensPedidos_id) {
+        this.itensPedidos_id = itensPedidos_id;
+    }
+
+    public List<AvaliacoesModel> getAvaliacoes_id() {
+        return avaliacoes_id;
+    }
+
+    public void setAvaliacoes_id(List<AvaliacoesModel> avaliacoes_id) {
+        this.avaliacoes_id = avaliacoes_id;
+    }
+
+    public List<UsuarioModel> getUsuariosNoCarrinho_id() {
+        return usuariosNoCarrinho_id;
+    }
+
+    public void setUsuariosNoCarrinho_id(List<UsuarioModel> usuariosNoCarrinho_id) {
+        this.usuariosNoCarrinho_id = usuariosNoCarrinho_id;
     }
 }

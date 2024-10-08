@@ -1,5 +1,6 @@
 package ecommerce.Model;
 
+import ecommerce.Dto.ProdutoDto;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -12,8 +13,14 @@ public class AvaliacoesModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID avaliacao_id;
-    private UUID produto_id;
-    private UUID cliente_id;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private UsuarioModel usuario_id;
+
+    @ManyToOne
+    @JoinColumn(name = "produto_id")
+    private ProdutoModel produto_id;
+
     private int nota;
     private String comentario;
     private String criado_em;
@@ -26,20 +33,20 @@ public class AvaliacoesModel implements Serializable {
         this.avaliacao_id = avaliacao_id;
     }
 
-    public UUID getProduto_id() {
+    public ProdutoModel getProduto_id() {
         return produto_id;
     }
 
-    public void setProduto_id(UUID produto_id) {
+    public void setProduto_id(ProdutoModel produto_id) {
         this.produto_id = produto_id;
     }
 
-    public UUID getCliente_id() {
-        return cliente_id;
+    public UsuarioModel getCliente_id() {
+        return usuario_id;
     }
 
-    public void setCliente_id(UUID cliente_id) {
-        this.cliente_id = cliente_id;
+    public void setCliente_id(UsuarioModel usuario_id ) {
+        this.usuario_id = usuario_id;
     }
 
     public int getNota() {

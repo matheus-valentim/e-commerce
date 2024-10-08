@@ -3,6 +3,7 @@ package ecommerce.Model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -13,8 +14,21 @@ public class PedidosModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID pedido_id;
-    private UUID usuario_id;
-    private UUID endereco_id;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private UsuarioModel usuario_id;
+
+    @OneToMany(mappedBy = "pedido_id", cascade = CascadeType.ALL)
+    private List<ItensPedidoModel> itensPedidos;
+
+    @OneToMany(mappedBy = "pedido_id", cascade = CascadeType.ALL)
+    private List<PagamentosModel> pagamentos;
+
+    @ManyToOne
+    @JoinColumn(name = "endereco_id")
+    private EnderecosModel endereco_id;
+
     private String data_pedido;
     private float valor_total;
     private String status;
@@ -27,19 +41,19 @@ public class PedidosModel implements Serializable {
         this.pedido_id = pedido_id;
     }
 
-    public UUID getUsuario_id() {
+    public UsuarioModel getUsuario_id() {
         return usuario_id;
     }
 
-    public void setUsuario_id(UUID usuario_id) {
+    public void setUsuario_id(UsuarioModel usuario_id) {
         this.usuario_id = usuario_id;
     }
 
-    public UUID getEndereco_id() {
+    public EnderecosModel getEndereco_id() {
         return endereco_id;
     }
 
-    public void setEndereco_id(UUID endereco_id) {
+    public void setEndereco_id(EnderecosModel endereco_id) {
         this.endereco_id = endereco_id;
     }
 

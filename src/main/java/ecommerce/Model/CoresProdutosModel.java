@@ -13,7 +13,11 @@ public class CoresProdutosModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID cor_produto_id;
-    private UUID produto_id;
+
+    @ManyToOne
+    @JoinColumn(name = "produto_id")
+    private ProdutoModel produto_id;
+
     private String cor;
     private int estoque;
 
@@ -25,11 +29,11 @@ public class CoresProdutosModel implements Serializable {
         this.cor_produto_id = cor_produto_id;
     }
 
-    public UUID getProduto_id() {
+    public ProdutoModel getProduto_id() {
         return produto_id;
     }
 
-    public void setProduto_id(UUID produto_id) {
+    public void setProduto_id(ProdutoModel produto_id) {
         this.produto_id = produto_id;
     }
 

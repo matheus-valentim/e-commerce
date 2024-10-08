@@ -13,7 +13,11 @@ public class PagamentosModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID pagamento_id;
-    private UUID pedido_id;
+
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
+    private PedidosModel pedido_id;
+
     private String data_pagamento;
     private float valor;
     private String metodo_pagamento;
@@ -27,11 +31,11 @@ public class PagamentosModel implements Serializable {
         this.pagamento_id = pagamento_id;
     }
 
-    public UUID getPedido_id() {
+    public PedidosModel getPedido_id() {
         return pedido_id;
     }
 
-    public void setPedido_id(UUID pedido_id) {
+    public void setPedido_id(PedidosModel pedido_id) {
         this.pedido_id = pedido_id;
     }
 

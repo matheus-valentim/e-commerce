@@ -3,6 +3,7 @@ package ecommerce.Model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -12,13 +13,28 @@ public class UsuarioModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID usuario_id;
-    private UUID endereço_id;
+
+    @OneToMany(mappedBy = "usuario_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+     private List<EnderecosModel> enderecos;
+
+    @OneToMany(mappedBy = "usuario_id", cascade = CascadeType.ALL)
+    private List<PedidosModel> pedidos_id;
+
+    @ManyToMany
+    @JoinTable(
+            name = "carrinho_compras",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "produto_id")
+    )
+    private List<ProdutoModel> carrinho_id;
+
     private String nome;
     private String sobrenome;
     private String email;
     private String senha;
     private String criado_em;
     private String telefone;
+    private String role;
 
     public UUID getUsuario_id() {
         return usuario_id;
@@ -28,12 +44,12 @@ public class UsuarioModel implements Serializable {
         this.usuario_id = usuario_id;
     }
 
-    public UUID getEndereço_id() {
-        return endereço_id;
+    public List<EnderecosModel> getEnderecos() {
+        return enderecos;
     }
 
-    public void setEndereço_id(UUID endereço_id) {
-        this.endereço_id = endereço_id;
+    public void setEnderecos(List<EnderecosModel> enderecos) {
+        this.enderecos = enderecos;
     }
 
     public String getSobrenome() {
@@ -42,14 +58,6 @@ public class UsuarioModel implements Serializable {
 
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
-    }
-
-    public UUID getId_usuario() {
-        return usuario_id;
-    }
-
-    public void setId_usuario(UUID id_usuario) {
-        this.usuario_id = id_usuario;
     }
 
     public String getNome() {
@@ -90,5 +98,29 @@ public class UsuarioModel implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public List<ProdutoModel> getCarrinho_id() {
+        return carrinho_id;
+    }
+
+    public void setCarrinho_id(List<ProdutoModel> carrinho_id) {
+        this.carrinho_id = carrinho_id;
+    }
+
+    public List<PedidosModel> getPedidos_id() {
+        return pedidos_id;
+    }
+
+    public void setPedidos_id(List<PedidosModel> pedidos_id) {
+        this.pedidos_id = pedidos_id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
