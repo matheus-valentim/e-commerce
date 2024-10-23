@@ -30,7 +30,7 @@ public class ProdutoModel implements Serializable {
     @OneToMany(mappedBy = "produto_id", cascade = CascadeType.ALL)
     private List<AvaliacoesModel> avaliacoes_id;
 
-    @ManyToMany(mappedBy = "carrinho_id")
+    @ManyToMany(mappedBy = "carrinho")
     private List<UsuarioModel> usuariosNoCarrinho_id;
 
     private String nome;

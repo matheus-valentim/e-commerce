@@ -1,47 +1,55 @@
 package ecommerce.Model;
 
 import jakarta.persistence.*;
-
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "usuarios")
 public class UsuarioModel implements Serializable {
-    private static final long serialVersionUId = 1L;
+    private static final long serialVersionUID = 1L;
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID usuario_id;
+    private UUID user_id;
 
-    @OneToMany(mappedBy = "usuario_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-     private List<EnderecosModel> enderecos;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<EnderecosModel> enderecos;
 
     @OneToMany(mappedBy = "usuario_id", cascade = CascadeType.ALL)
-    private List<PedidosModel> pedidos_id;
+    private List<PedidosModel> pedidos;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "carrinho_compras",
+            name = "carrinho_id",
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "produto_id")
     )
-    private List<ProdutoModel> carrinho_id;
+    private List<ProdutoModel> carrinho;
 
     private String nome;
     private String sobrenome;
     private String email;
     private String senha;
-    private String criado_em;
+
+    @Column(name = "criado_em")
+    private String criadoEm;
+
     private String telefone;
     private String role;
 
-    public UUID getUsuario_id() {
-        return usuario_id;
+    // Getters e Setters
+    public UUID getUserId() {
+
+         return user_id;
     }
 
-    public void setUsuario_id(UUID usuario_id) {
-        this.usuario_id = usuario_id;
+    public void setUser_Id(UUID user_id) {
+        this.user_id = user_id;
     }
 
     public List<EnderecosModel> getEnderecos() {
@@ -52,12 +60,20 @@ public class UsuarioModel implements Serializable {
         this.enderecos = enderecos;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
+    public List<PedidosModel> getPedidos() {
+        return pedidos;
     }
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
+    public void setPedidos(List<PedidosModel> pedidos) {
+        this.pedidos = pedidos;
+    }
+
+    public List<ProdutoModel> getCarrinho() {
+        return carrinho;
+    }
+
+    public void setCarrinho(List<ProdutoModel> carrinho) {
+        this.carrinho = carrinho;
     }
 
     public String getNome() {
@@ -66,6 +82,14 @@ public class UsuarioModel implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 
     public String getEmail() {
@@ -84,12 +108,12 @@ public class UsuarioModel implements Serializable {
         this.senha = senha;
     }
 
-    public String getCriado_em() {
-        return criado_em;
+    public String getCriadoEm() {
+        return criadoEm;
     }
 
-    public void setCriado_em(String criado_em) {
-        this.criado_em = criado_em;
+    public void setCriadoEm(String criadoEm) {
+        this.criadoEm = criadoEm;
     }
 
     public String getTelefone() {
@@ -98,22 +122,6 @@ public class UsuarioModel implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public List<ProdutoModel> getCarrinho_id() {
-        return carrinho_id;
-    }
-
-    public void setCarrinho_id(List<ProdutoModel> carrinho_id) {
-        this.carrinho_id = carrinho_id;
-    }
-
-    public List<PedidosModel> getPedidos_id() {
-        return pedidos_id;
-    }
-
-    public void setPedidos_id(List<PedidosModel> pedidos_id) {
-        this.pedidos_id = pedidos_id;
     }
 
     public String getRole() {

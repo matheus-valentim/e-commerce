@@ -13,10 +13,9 @@ public class EnderecosModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID endereco_id;
-    @ManyToOne
-    @JoinColumn(name = "usuario_id",referencedColumnName = "usuario_id")
-    private UsuarioModel usuario_id;
-
+    @ManyToOne()
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private UsuarioModel usuario;
     private String logradouro;
     private String numero;
     private String complemento;
@@ -107,11 +106,11 @@ public class EnderecosModel implements Serializable {
         this.criado_em = criado_em;
     }
 
-    public UsuarioModel getUsuario_id() {
-        return usuario_id;
+    public UsuarioModel getUsuario() {
+        return usuario;
     }
 
-    public void setUsuario_id(UsuarioModel usuario_id) {
-        this.usuario_id = usuario_id;
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
     }
 }
