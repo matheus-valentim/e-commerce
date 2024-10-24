@@ -18,10 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.modelmapper.ModelMapper;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 public class UsuarioController {
@@ -31,13 +28,11 @@ public class UsuarioController {
     @Autowired
     private ModelMapper modelMapper;
 
-
     @GetMapping("/usuario")
-    public ResponseEntity getUsuarios(){
+    public ResponseEntity<List<UsuarioResponse>> getUsuarios(){
         List<UsuarioResponse> response = new ArrayList<>();
         List<UsuarioModel> userEntities = usuarioRepository.findAll();
         userEntities.forEach(userEntity -> response.add(modelMapper.map(userEntity, UsuarioResponse.class)));
-
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -46,11 +41,9 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioRepository.save(UsuarioMapper.toModel(usuarioDto)));
     }
 
-
     @DeleteMapping("/usuario/{id}")
-    public ResponseEntity<Object> deleteUsuarios(@PathVariable( value = "id") UUID id){
+    public ResponseEntity<Object> deleteUsuarios(@PathVariable(value = "id") UUID id){
         usuarioRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body("Objeto deletado");
     }
-
 }
