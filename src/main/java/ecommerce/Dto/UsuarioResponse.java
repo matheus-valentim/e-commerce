@@ -3,9 +3,9 @@ package ecommerce.Dto;
 import java.util.List;
 
 public class UsuarioResponse {
-    private static String nome;
-    private static String sobrenome;
-    private static List<EnderecoResponse> enderecos;
+    private  String nome;
+    private  String sobrenome;
+    private  List<EnderecoResponse> enderecos;
 
 
     public UsuarioResponse(String nome, String sobrenome, List<EnderecoResponse> enderecos) {

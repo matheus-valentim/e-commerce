@@ -3,6 +3,7 @@ package ecommerce.Model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,6 +15,8 @@ public class CategoriasModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID categoria_id;
     private String nome;
+
+
 
     public UUID getCategoria_id() {
         return categoria_id;
@@ -30,4 +33,5 @@ public class CategoriasModel implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 }

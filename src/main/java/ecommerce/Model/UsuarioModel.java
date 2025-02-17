@@ -20,14 +20,17 @@ public class UsuarioModel implements Serializable {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<EnderecosModel> enderecos;
 
-    @OneToMany(mappedBy = "usuario_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<PedidosModel> pedidos;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AvaliacoesModel> avaliacoes;
+
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "carrinho_id",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "produto_id")
+            name = "carrinho",
+            joinColumns = @JoinColumn(name = "usuario"),
+            inverseJoinColumns = @JoinColumn(name = "produto")
     )
     private List<ProdutoModel> carrinho;
 
@@ -130,5 +133,13 @@ public class UsuarioModel implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<AvaliacoesModel> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<AvaliacoesModel> avaliacoes) {
+        this.avaliacoes = avaliacoes;
     }
 }

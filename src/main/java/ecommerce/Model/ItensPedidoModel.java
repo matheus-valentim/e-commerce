@@ -15,12 +15,12 @@ public class ItensPedidoModel implements Serializable {
     private UUID item_pedido_id;
 
     @ManyToOne
-    @JoinColumn(name = "pedido_id")
-    private PedidosModel pedido_id;
+    @JoinColumn(name = "pedido")
+    private PedidosModel pedido;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id")
-    private ProdutoModel produto_id;
+    @JoinColumn(name = "produto")
+    private ProdutoModel produto;
 
     private int quantidade;
     private float preco;
@@ -33,22 +33,6 @@ public class ItensPedidoModel implements Serializable {
 
     public void setItem_pedido_id(UUID item_pedido_id) {
         this.item_pedido_id = item_pedido_id;
-    }
-
-    public PedidosModel getPedido_id() {
-        return pedido_id;
-    }
-
-    public void setPedido_id(PedidosModel pedido_id) {
-        this.pedido_id = pedido_id;
-    }
-
-    public ProdutoModel getProduto_id() {
-        return produto_id;
-    }
-
-    public void setProduto_id(ProdutoModel produto_id) {
-        this.produto_id = produto_id;
     }
 
     public int getQuantidade() {
@@ -81,5 +65,21 @@ public class ItensPedidoModel implements Serializable {
 
     public void setCor(String cor) {
         this.cor = cor;
+    }
+
+    public PedidosModel getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(PedidosModel pedido) {
+        this.pedido = pedido;
+    }
+
+    public ProdutoModel getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ProdutoModel produto) {
+        this.produto = produto;
     }
 }

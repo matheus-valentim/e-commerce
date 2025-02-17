@@ -14,12 +14,12 @@ public class AvaliacoesModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID avaliacao_id;
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private UsuarioModel usuario_id;
+    @JoinColumn(name = "usuario")
+    private UsuarioModel usuario;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id")
-    private ProdutoModel produto_id;
+    @JoinColumn(name = "produto")
+    private ProdutoModel produto;
 
     private int nota;
     private String comentario;
@@ -31,22 +31,6 @@ public class AvaliacoesModel implements Serializable {
 
     public void setAvaliacao_id(UUID avaliacao_id) {
         this.avaliacao_id = avaliacao_id;
-    }
-
-    public ProdutoModel getProduto_id() {
-        return produto_id;
-    }
-
-    public void setProduto_id(ProdutoModel produto_id) {
-        this.produto_id = produto_id;
-    }
-
-    public UsuarioModel getCliente_id() {
-        return usuario_id;
-    }
-
-    public void setCliente_id(UsuarioModel usuario_id ) {
-        this.usuario_id = usuario_id;
     }
 
     public int getNota() {
@@ -71,5 +55,21 @@ public class AvaliacoesModel implements Serializable {
 
     public void setCriado_em(String criado_em) {
         this.criado_em = criado_em;
+    }
+
+    public UsuarioModel getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
+    }
+
+    public ProdutoModel getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ProdutoModel produto) {
+        this.produto = produto;
     }
 }

@@ -16,13 +16,13 @@ public class PedidosModel implements Serializable {
     private UUID pedido_id;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private UsuarioModel usuario_id;
+    @JoinColumn(name = "usuario")
+    private UsuarioModel usuario;
 
-    @OneToMany(mappedBy = "pedido_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItensPedidoModel> itensPedidos;
 
-    @OneToMany(mappedBy = "pedido_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<PagamentosModel> pagamentos;
 
     @ManyToOne
@@ -39,14 +39,6 @@ public class PedidosModel implements Serializable {
 
     public void setPedido_id(UUID pedido_id) {
         this.pedido_id = pedido_id;
-    }
-
-    public UsuarioModel getUsuario_id() {
-        return usuario_id;
-    }
-
-    public void setUsuario_id(UsuarioModel usuario_id) {
-        this.usuario_id = usuario_id;
     }
 
     public EnderecosModel getEndereco_id() {
@@ -79,5 +71,29 @@ public class PedidosModel implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public UsuarioModel getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<ItensPedidoModel> getItensPedidos() {
+        return itensPedidos;
+    }
+
+    public void setItensPedidos(List<ItensPedidoModel> itensPedidos) {
+        this.itensPedidos = itensPedidos;
+    }
+
+    public List<PagamentosModel> getPagamentos() {
+        return pagamentos;
+    }
+
+    public void setPagamentos(List<PagamentosModel> pagamentos) {
+        this.pagamentos = pagamentos;
     }
 }

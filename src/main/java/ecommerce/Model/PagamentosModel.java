@@ -15,8 +15,8 @@ public class PagamentosModel implements Serializable {
     private UUID pagamento_id;
 
     @ManyToOne
-    @JoinColumn(name = "pedido_id")
-    private PedidosModel pedido_id;
+    @JoinColumn(name = "pedido")
+    private PedidosModel pedido;
 
     private String data_pagamento;
     private float valor;
@@ -29,14 +29,6 @@ public class PagamentosModel implements Serializable {
 
     public void setPagamento_id(UUID pagamento_id) {
         this.pagamento_id = pagamento_id;
-    }
-
-    public PedidosModel getPedido_id() {
-        return pedido_id;
-    }
-
-    public void setPedido_id(PedidosModel pedido_id) {
-        this.pedido_id = pedido_id;
     }
 
     public String getData_pagamento() {
@@ -69,5 +61,13 @@ public class PagamentosModel implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public PedidosModel getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(PedidosModel pedido) {
+        this.pedido = pedido;
     }
 }

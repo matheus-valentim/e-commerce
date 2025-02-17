@@ -14,8 +14,8 @@ public class TamanhosProdutosModel implements Serializable {
     private UUID tamanho_produto_id;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id")
-    private ProdutoModel produto_id;
+    @JoinColumn(name = "produto")
+    private ProdutoModel produto;
 
     private String tamanho;
     private int estoque;
@@ -26,14 +26,6 @@ public class TamanhosProdutosModel implements Serializable {
 
     public void setTamanho_produto_id(UUID tamanho_produto_id) {
         this.tamanho_produto_id = tamanho_produto_id;
-    }
-
-    public ProdutoModel getProduto_id() {
-        return produto_id;
-    }
-
-    public void setProduto_id(ProdutoModel produto_id) {
-        this.produto_id = produto_id;
     }
 
     public String getTamanho() {
@@ -50,5 +42,13 @@ public class TamanhosProdutosModel implements Serializable {
 
     public void setEstoque(int estoque) {
         this.estoque = estoque;
+    }
+
+    public ProdutoModel getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ProdutoModel produto) {
+        this.produto = produto;
     }
 }

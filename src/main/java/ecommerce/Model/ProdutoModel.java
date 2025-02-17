@@ -3,6 +3,7 @@ package ecommerce.Model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,23 +16,23 @@ public class ProdutoModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID produto_id;
     @ManyToOne
-    @JoinColumn(name = "categoria_id")
-    private CategoriasModel categoria_id;
+    @JoinColumn(name = "categoria")
+    private CategoriasModel categoria;
 
-    @OneToMany(mappedBy = "produto_id", cascade = CascadeType.ALL)
-    private List<TamanhosProdutosModel> tamanhos_id;
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<TamanhosProdutosModel> tamanhos;
 
-    @OneToMany(mappedBy = "produto_id", cascade = CascadeType.ALL)
-    private List<CoresProdutosModel> cores_id;
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<CoresProdutosModel> cores;
 
-    @OneToMany(mappedBy = "produto_id", cascade = CascadeType.ALL)
-    private List<ItensPedidoModel> itensPedidos_id;
+    @OneToMany(mappedBy = "produto",orphanRemoval = true, cascade = CascadeType.PERSIST)
+    private List<ItensPedidoModel> itensPedidos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "produto_id", cascade = CascadeType.ALL)
-    private List<AvaliacoesModel> avaliacoes_id;
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<AvaliacoesModel> avaliacoes;
 
-    @ManyToMany(mappedBy = "carrinho")
-    private List<UsuarioModel> usuariosNoCarrinho_id;
+    @ManyToMany(mappedBy = "carrinho", cascade = CascadeType.ALL)
+    private List<UsuarioModel> usuariosNoCarrinho;
 
     private String nome;
     private String descricao;
@@ -49,14 +50,6 @@ public class ProdutoModel implements Serializable {
 
     public void setProduto_id(UUID produto_id) {
         this.produto_id = produto_id;
-    }
-
-    public CategoriasModel getCategoria_id() {
-        return categoria_id;
-    }
-
-    public void setCategoria_id(CategoriasModel categoria_id) {
-        this.categoria_id = categoria_id;
     }
 
     public String getNome() {
@@ -123,43 +116,51 @@ public class ProdutoModel implements Serializable {
         this.atualizado_em = arualizado_em;
     }
 
-    public List<TamanhosProdutosModel> getTamanhos_id() {
-        return tamanhos_id;
+    public List<ItensPedidoModel> getItensPedidos() {
+        return itensPedidos;
     }
 
-    public void setTamanhos_id(List<TamanhosProdutosModel> tamanhos_id) {
-        this.tamanhos_id = tamanhos_id;
+    public void setItensPedidos(List<ItensPedidoModel> itensPedidos) {
+        this.itensPedidos = itensPedidos;
     }
 
-    public List<CoresProdutosModel> getCores_id() {
-        return cores_id;
+    public List<UsuarioModel> getUsuariosNoCarrinho() {
+        return usuariosNoCarrinho;
     }
 
-    public void setCores_id(List<CoresProdutosModel> cores_id) {
-        this.cores_id = cores_id;
+    public void setUsuariosNoCarrinho(List<UsuarioModel> usuariosNoCarrinho) {
+        this.usuariosNoCarrinho = usuariosNoCarrinho;
     }
 
-    public List<ItensPedidoModel> getItensPedidos_id() {
-        return itensPedidos_id;
+    public List<AvaliacoesModel> getAvaliacoes() {
+        return avaliacoes;
     }
 
-    public void setItensPedidos_id(List<ItensPedidoModel> itensPedidos_id) {
-        this.itensPedidos_id = itensPedidos_id;
+    public void setAvaliacoes(List<AvaliacoesModel> avaliacoes) {
+        this.avaliacoes = avaliacoes;
     }
 
-    public List<AvaliacoesModel> getAvaliacoes_id() {
-        return avaliacoes_id;
+    public List<CoresProdutosModel> getCores() {
+        return cores;
     }
 
-    public void setAvaliacoes_id(List<AvaliacoesModel> avaliacoes_id) {
-        this.avaliacoes_id = avaliacoes_id;
+    public void setCores(List<CoresProdutosModel> cores) {
+        this.cores = cores;
     }
 
-    public List<UsuarioModel> getUsuariosNoCarrinho_id() {
-        return usuariosNoCarrinho_id;
+    public List<TamanhosProdutosModel> getTamanhos() {
+        return tamanhos;
     }
 
-    public void setUsuariosNoCarrinho_id(List<UsuarioModel> usuariosNoCarrinho_id) {
-        this.usuariosNoCarrinho_id = usuariosNoCarrinho_id;
+    public void setTamanhos(List<TamanhosProdutosModel> tamanhos) {
+        this.tamanhos = tamanhos;
+    }
+
+    public CategoriasModel getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(CategoriasModel categoria) {
+        this.categoria = categoria;
     }
 }

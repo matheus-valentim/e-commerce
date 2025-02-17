@@ -15,8 +15,8 @@ public class CoresProdutosModel implements Serializable {
     private UUID cor_produto_id;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id")
-    private ProdutoModel produto_id;
+    @JoinColumn(name = "produto")
+    private ProdutoModel produto;
 
     private String cor;
     private int estoque;
@@ -27,14 +27,6 @@ public class CoresProdutosModel implements Serializable {
 
     public void setCor_produto_id(UUID cor_produto_id) {
         this.cor_produto_id = cor_produto_id;
-    }
-
-    public ProdutoModel getProduto_id() {
-        return produto_id;
-    }
-
-    public void setProduto_id(ProdutoModel produto_id) {
-        this.produto_id = produto_id;
     }
 
     public String getCor() {
@@ -51,5 +43,13 @@ public class CoresProdutosModel implements Serializable {
 
     public void setEstoque(int estoque) {
         this.estoque = estoque;
+    }
+
+    public ProdutoModel getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ProdutoModel produto) {
+        this.produto = produto;
     }
 }
